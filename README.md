@@ -12,5 +12,7 @@ client - react js - To be added
 - Setup docker 
     * Mac - setup docker desktop community edition 
     
+    ```
     docker run -p 6379:6379 -d redis 
     docker exec -it <docker image id> /bin/sh
+    ```
