@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
-	"one-time-secret-heroku/service"
 
+	// Service level modules
+	"one-time-secret/service"
+
+	// Gin server for rest api
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
@@ -15,10 +18,12 @@ func main() {
 	r.Use(static.Serve("/", static.LocalFile("./web", true)))
 	api := r.Group("/api")
 
-	name := service.Test()
-	fmt.Println("Name is : ", name)
+	//name := service.Test()
+	//fmt.Println("Name is : ", name)
 
 	api.GET("/ping", func(c *gin.Context) {
+		name := service.Test()
+		fmt.Println("Name is : ", name)
 		c.JSON(200, gin.H{
 			"message": name,
 		})
