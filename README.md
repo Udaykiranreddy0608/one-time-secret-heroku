@@ -11,6 +11,7 @@ client - react js - To be added
 
 - Setup docker 
     * Mac - setup docker desktop community edition 
+    * Run redis on docker. An in-memory database. We will use `redis` to store secrets and we will also leverage `redis EXPIRE` to delete secrets based on timeout. 
     
     ```
     docker run -p 6379:6379 -d redis 
