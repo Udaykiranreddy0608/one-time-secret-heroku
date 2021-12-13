@@ -45,7 +45,6 @@ func main() {
 				"message": "failed to save record.",
 			})
 		}
-
 	})
 
 	api.POST("/post", func(c *gin.Context) {
@@ -54,6 +53,7 @@ func main() {
 		c.JSON(200, gin.H{"status": login.USER}) // Your custom response here
 	})
 
+	// Simple monitor API to check if API is working
 	api.GET("/monitor", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"Status": "READY",
