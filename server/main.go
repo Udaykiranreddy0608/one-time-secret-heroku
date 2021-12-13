@@ -2,6 +2,7 @@ package main
 
 import (
 	// Redis service
+
 	"one-time-secret/goredis"
 
 	// Service level modules
@@ -24,14 +25,21 @@ func main() {
 	api := r.Group("/api")
 	goredis.InitPool()
 	//name := service.Test()
-	//fmt.Println("Name is : ", name)
-	// api.GET("/ping", func(c *gin.Context) {
-	// 	name := service.Test()
-	// 	fmt.Println("Name is : ", name)
-	// 	c.JSON(200, gin.H{
-	// 		"message": name,
-	// 	})
-	// })
+
+	api.GET("/ping", func(c *gin.Context) {
+		key, value, err := goredis.Set("", "")
+		if err != nil {
+			c.JSON(200, gin.H{
+				"key":   key,
+				"value": value,
+			})
+		} else {
+			c.JSON(400, gin.H{
+				"message": "failed to save record.",
+			})
+		}
+
+	})
 
 	api.POST("/post", func(c *gin.Context) {
 		var login LOGIN

@@ -23,3 +23,31 @@ func InitPool() {
 		},
 	}
 }
+
+func Get(key string) (string, string, error) {
+	// get conn and put back when exit from method
+	conn := pool.Get()
+	defer conn.Close()
+
+	s, err := redis.String(conn.Do("GET", key))
+	if err != nil {
+		log.Printf("ERROR: fail get key %s, error %s", key, err.Error())
+		return "", "", err
+	}
+
+	return key, s, nil
+}
+
+func Set(key string, val string) (string, string, error) {
+	// get conn and put back when exit from method
+	conn := pool.Get()
+	defer conn.Close()
+
+	_, err := conn.Do("SET", key, val)
+	if err != nil {
+		log.Printf("ERROR: fail set key %s, val %s, error %s", key, val, err.Error())
+		return "", "", err
+	}
+
+	return key, val, nil
+}
