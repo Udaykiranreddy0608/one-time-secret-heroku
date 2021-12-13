@@ -29,5 +29,20 @@ func main() {
 		})
 	})
 
-	r.Run()
+	api.POST("/ping", func(c *gin.Context) {
+		name := service.Test()
+		fmt.Println("Name is : ", name)
+		c.JSON(200, gin.H{
+			"message": name,
+		})
+	})
+
+	api.POST("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"Status": "READY",
+		})
+	})
+
+	// Specifying on which post to run
+	r.Run(":8080")
 }

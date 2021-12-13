@@ -11,7 +11,8 @@ import (
 )
 
 func main() {
-	key := []byte("a very very very very secret key") // 32 bytes
+	key := []byte("dddf0fa0-59eb-11ec-bf63-0242ac13") // 32 bytes
+	// dddf0fa0-59eb-11ec-bf63-0242ac13
 	secret := "adsasd"
 	if secret == "" {
 		panic("Secret can't be null")
