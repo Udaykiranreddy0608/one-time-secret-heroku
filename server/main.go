@@ -31,7 +31,7 @@ func main() {
 	goredis.InitPool()
 
 	// Create secret with key and value in redis
-	api.GET("/createSecret", func(c *gin.Context) {
+	api.POST("/createSecret", func(c *gin.Context) {
 		var secret SECRET
 		c.BindJSON(&secret)
 		key, value, err := goredis.Set(secret.KEY, secret.VALUE)
@@ -47,7 +47,7 @@ func main() {
 		}
 	})
 
-	api.POST("/post", func(c *gin.Context) {
+	api.POST("/testPost", func(c *gin.Context) {
 		var login LOGIN
 		c.BindJSON(&login)
 		c.JSON(200, gin.H{"status": login.USER}) // Your custom response here
