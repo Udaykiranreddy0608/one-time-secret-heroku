@@ -29,9 +29,9 @@ func main() {
 	r.Use(static.Serve("/", static.LocalFile("./web", true)))
 	api := r.Group("/api")
 	goredis.InitPool()
-	//name := service.Test()
 
-	api.GET("/ping", func(c *gin.Context) {
+	// Create secret with key and value in redis
+	api.GET("/createSecret", func(c *gin.Context) {
 		var secret SECRET
 		c.BindJSON(&secret)
 		key, value, err := goredis.Set(secret.KEY, secret.VALUE)
