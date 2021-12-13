@@ -17,6 +17,11 @@ type LOGIN struct {
 	PASSWORD string `json:"password" binding:"required"`
 }
 
+type SECRET struct {
+	KEY   string `json:"key" binding:"required"`
+	VALUE string `json:"value" binding:"required"`
+}
+
 func main() {
 
 	r := gin.Default()
@@ -27,7 +32,9 @@ func main() {
 	//name := service.Test()
 
 	api.GET("/ping", func(c *gin.Context) {
-		key, value, err := goredis.Set("", "")
+		var secret SECRET
+		c.BindJSON(&secret)
+		key, value, err := goredis.Set(secret.KEY, secret.VALUE)
 		if err != nil {
 			c.JSON(200, gin.H{
 				"key":   key,
