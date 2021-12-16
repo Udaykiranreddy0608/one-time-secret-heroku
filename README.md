@@ -1,6 +1,9 @@
 # one-time-secret-heroku
 A simple Go lang app which helps is sharing a one time password with others.
 
+[Design approach](./one-time-secret.drawio.png)
+
+
 - Added 2 modules server and client 
 
 server - go modules for rest api 
