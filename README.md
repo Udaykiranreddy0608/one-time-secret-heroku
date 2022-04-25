@@ -9,7 +9,7 @@ A simple Go lang app which helps is sharing a one time password with others.
    * client - react js - `To be added` 
 
 
-### Infrastrcture setup 
+### Infrastructure setup 
 
 - Setup docker 
     * Mac - setup docker desktop community edition 
