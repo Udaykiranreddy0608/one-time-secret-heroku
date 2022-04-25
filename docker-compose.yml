@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  cache:
+    image: redis:alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+  api:
+    image: golang:1.17-alpine
+    build:
+      context: ./server
+      target: production
+    depends_on:
+      - cache
+    ports:
+      - 8081:8081
+    environment:
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    links:
+      - cache
+    volumes:
+      - ./:/src
+volumes:
+  db:
+    driver: local
+  cache:
+    driver: local
