@@ -25,5 +25,6 @@ A simple Go lang app which helps is sharing a one time password with others.
 
 #### Server side
 - Running server side code 
-   * Navigate to `./server` folder 
+   * Make sure you have redis docker up and running before running server side application
+   * Navigate to `./server` folder
    * Run following cmd `go run main.go`
