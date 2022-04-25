@@ -18,4 +18,5 @@ A simple Go lang app which helps is sharing a one time password with others.
     ```
     docker run -p 6379:6379 -d redis 
     docker exec -it <docker image id> /bin/sh
+    # redis-cli -- to access redis CLI
     ```
