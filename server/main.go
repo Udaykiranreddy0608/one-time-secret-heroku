@@ -3,6 +3,7 @@ package main
 import (
 	// Redis service
 
+	"fmt"
 	"one-time-secret/goredis"
 
 	// Service level modules
@@ -35,7 +36,8 @@ func main() {
 		var secret SECRET
 		c.BindJSON(&secret)
 		key, value, err := goredis.Set(secret.KEY, secret.VALUE)
-		if err != nil {
+		if err == nil {
+			fmt.Println(err)
 			c.JSON(200, gin.H{
 				"key":   key,
 				"value": value,
@@ -43,6 +45,24 @@ func main() {
 		} else {
 			c.JSON(400, gin.H{
 				"message": "failed to save record.",
+			})
+		}
+	})
+
+	// Create secret with key and value in redis
+	api.POST("/getSecret", func(c *gin.Context) {
+		var secret SECRET
+		c.BindJSON(&secret)
+		key, value, err := goredis.Get(secret.KEY)
+		if err == nil {
+			fmt.Println(err)
+			c.JSON(200, gin.H{
+				"key":   key,
+				"value": value,
+			})
+		} else {
+			c.JSON(400, gin.H{
+				"message": "failed to get record.",
 			})
 		}
 	})
