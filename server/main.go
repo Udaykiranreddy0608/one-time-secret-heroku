@@ -13,11 +13,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type LOGIN struct {
-	USER     string `json:"user" binding:"required"`
-	PASSWORD string `json:"password" binding:"required"`
-}
-
 type SECRET struct {
 	KEY   string `json:"key" binding:"required"`
 	VALUE string `json:"value" binding:"required"`
@@ -32,7 +27,7 @@ func main() {
 	goredis.InitPool()
 
 	// Create secret with key and value in redis
-	api.POST("/createSecret", func(c *gin.Context) {
+	api.POST("/secret/v1/set", func(c *gin.Context) {
 		var secret SECRET
 		c.BindJSON(&secret)
 		key, value, err := goredis.Set(secret.KEY, secret.VALUE)
@@ -49,8 +44,8 @@ func main() {
 		}
 	})
 
-	// Create secret with key and value in redis
-	api.POST("/getSecret", func(c *gin.Context) {
+	// Get secret with key from redis
+	api.POST("/secret/v1/get", func(c *gin.Context) {
 		var secret SECRET
 		c.BindJSON(&secret)
 		key, value, err := goredis.Get(secret.KEY)
@@ -67,12 +62,6 @@ func main() {
 		}
 	})
 
-	api.POST("/testPost", func(c *gin.Context) {
-		var login LOGIN
-		c.BindJSON(&login)
-		c.JSON(200, gin.H{"status": login.USER}) // Your custom response here
-	})
-
 	// Simple monitor API to check if API is working
 	api.GET("/monitor", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -80,6 +69,6 @@ func main() {
 		})
 	})
 
-	// Specifying on which post to run
+	// Specifying on which port to run
 	r.Run(":8081")
 }
