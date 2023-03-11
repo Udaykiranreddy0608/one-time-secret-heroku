@@ -8,4 +8,4 @@ RUN go build -o /one-time-secret
 
 EXPOSE 8081
 
-CMD [ "/one-time-secret" ]
+CMD [ "./one-time-secret" ]
