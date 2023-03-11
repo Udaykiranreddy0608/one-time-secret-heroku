@@ -15,4 +15,6 @@
 # vendor/
 .idea
 .vscode
-./server/one-time-secret
+
+# Exclude go build files 
+/server/one-time-secret
