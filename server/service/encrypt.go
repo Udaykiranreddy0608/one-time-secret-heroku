@@ -18,7 +18,7 @@ func main() {
 		panic("Secret can't be null")
 	}
 	plaintext := []byte(secret)
-	fmt.Printf("%s\n", plaintext)
+	fmt.Printf("Secrets plain text : %s", plaintext)
 	ciphertext, err := encrypt(key, plaintext)
 	if err != nil {
 		log.Fatal(err)
